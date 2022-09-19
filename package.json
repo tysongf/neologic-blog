@@ -1,0 +1,19 @@
+{
+  "name": "neologic-blog",
+  "version": "0.0.1",
+  "description": "Neologic Blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tysongf/neologic-blog.git"
+  },
+  "author": "Tyson G Fritz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tysongf/neologic-blog/issues"
+  },
+  "homepage": "https://github.com/tysongf/neologic-blog#readme"
+}
