@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/tysongf/neologic-blog/issues"
   },
-  "homepage": "https://github.com/tysongf/neologic-blog#readme"
+  "homepage": "https://github.com/tysongf/neologic-blog#readme",
+  "dependencies": {
+    "mongoose": "^6.6.1"
+  }
 }
