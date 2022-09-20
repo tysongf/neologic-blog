@@ -5,8 +5,8 @@ const apiRouter = express.Router();
 
 apiRouter.get("/entries", entriesController.httpGetAllEntries);
 apiRouter.post("/entries", entriesController.httpPostEntry);
-//apiRouter.put("/entries", entriesController.httpPutEntry);
-//apiRouter.get("/entries/:id", entriesController.httpGetEntry);
+apiRouter.patch("/entries", entriesController.httpPatchEntry);
+apiRouter.get("/entries/:id", entriesController.httpGetEntry);
 apiRouter.delete("/entries/:id", entriesController.httpDeleteEntry);
 
 apiRouter.get("/quote", quotesController.httpGetQuote);
