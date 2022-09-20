@@ -15,15 +15,12 @@ async function httpGetAllEntries(req, res) {
 
 async function httpPostEntry(req, res) {
    let newEntry = req.body;
-   console.log(req.body);
 
    const errors = [];
    if (!newEntry.title) errors.push("'title' field is required.");
    if (!newEntry.description) errors.push("'description' field is required.");
    if (!newEntry.quote_id) errors.push("'quote_id' field is required.");
    if (errors.length > 0) return res.status(400).json({ errors: errors });
-
-   newEntry.createdAt = new Date();
 
    try {
       return res.status(201).json(await createEntry(newEntry));
