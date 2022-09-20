@@ -1,4 +1,4 @@
-const { getRandomLocalQuote } = require("../models/quotes.model");
+const { getExternalQuote } = require("../models/quotes.model");
 
 async function httpGetQuote(req, res) {
    const newQuote = {
@@ -6,11 +6,11 @@ async function httpGetQuote(req, res) {
       author: "The Developer",
    };
    try {
-      quotesModel.getExternalQuote((quote) => {
-         newQuote = quote;
+      getExternalQuote().then((quote) => {
+         return res.status(200).json(quote);
       });
    } catch (err) {
-      console.log(newQuote.quote);
+      return res.status(400).json({ errors: [err] });
    }
 }
 
