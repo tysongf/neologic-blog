@@ -3,6 +3,20 @@ const mongo_options = { _id: 0, __v: 0 };
 const NINJA_API_URL = process.env.NINJA_API_URL;
 const NINJA_API_KEY = process.env.NINJA_API_KEY;
 
+const quote_categories = [
+   "attitude",
+   "courage",
+   "dreams",
+   "education",
+   "experience",
+   "future",
+   "imagination",
+   "inspirational",
+   "knowledge",
+   "learning",
+   "success",
+];
+
 async function getRandomLocalQuote() {
    return await quotes.count().exec(async function (err, count) {
       var random = Math.floor(Math.random() * count);
