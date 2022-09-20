@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const axios = require("axios");
 const quotes = require("./quotes.mongo");
 const mongo_options = { _id: 0, __v: 0 };
@@ -5,9 +6,6 @@ const NINJA_API_URL = process.env.NINJA_API_URL;
 const NINJA_API_KEY = process.env.NINJA_API_KEY;
 
 const quote_categories = [
-   "attitude",
-   "courage",
-   "education",
    "experience",
    "future",
    "imagination",
@@ -25,15 +23,23 @@ async function getRandomLocalQuote() {
 }
 
 async function upsertQuote(quote) {
+   if (!quote._id) {
+      quote._id = new mongoose.Types.ObjectId();
+   }
    const newQuote = await quotes.updateOne(
       { quote: quote.quote },
-      { quote: quote.quote, author: quote.author, category: quote.category },
+      {
+         _id: quote._id,
+         quote: quote.quote,
+         author: quote.author,
+         category: quote.category,
+      },
       { upsert: true }
    );
    return quotes.findOne({ _id: newQuote.upsertedId }, { __v: 0 });
 }
 
-async function getExternalQuote() {
+async function loadExternalQuote() {
    const NINJA_URL =
       process.env.NINJA_API_URL + "?category=" + getRandomCategory();
    const NINJA_HEADERS = { "X-Api-Key": process.env.NINJA_API_KEY };
@@ -58,5 +64,5 @@ async function getRandomZenQuote() {}
 
 module.exports = {
    getRandomLocalQuote,
-   getExternalQuote,
+   loadExternalQuote,
 };

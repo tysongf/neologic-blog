@@ -1,17 +1,17 @@
 const {
-   getExternalQuote,
+   loadExternalQuote,
    getRandomLocalQuote,
 } = require("../models/quotes.model");
 
 async function httpGetQuote(req, res) {
-   getExternalQuote()
+   //Load a new quote from external API into local database and returns it
+   loadExternalQuote()
       .then((quote) => {
          return res.status(200).json(quote);
       })
       .catch((err) => {
-         //Failsafe: return random quote from local database.
+         //Failsafe: returns an existing quote from local database.
          getRandomLocalQuote().then((quote) => {
-            console.log(quote);
             return res.status(200).json(quote);
          });
       });

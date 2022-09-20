@@ -1,10 +1,11 @@
-const mongoose = require("mongoose");
+const { mongoose, Schema } = require("mongoose");
 
 const entriesSchema = new mongoose.Schema(
    {
+      _id: { type: Schema.Types.ObjectId },
       title: { type: String, required: true },
       description: { type: String, required: true },
-      quote_id: { type: String, required: true },
+      quote: { type: Schema.Types.ObjectId, ref: "Quote" },
    },
    {
       timestamps: {
