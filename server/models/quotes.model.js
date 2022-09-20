@@ -1,5 +1,7 @@
 const quotes = require("./quotes.mongo");
 const mongo_options = { _id: 0, __v: 0 };
+const NINJA_API_URL = process.env.NINJA_API_URL;
+const NINJA_API_KEY = process.env.NINJA_API_KEY;
 
 async function getRandomLocalQuote() {
    return await quotes.count().exec(async function (err, count) {
@@ -18,12 +20,11 @@ async function upsertQuote(quote) {
       { author: quote.author },
       { upsert: true }
    );
+   return await quotes.findOne({ _id: "test" });
 }
 
 async function getExternalQuote() {
-   //tro to get TSS Quote
-   //fallback to Zen Quote
-   //throw error on fail
+   upsertQuote(newQuote);
 }
 
 async function getRandomTSSQuote() {}
