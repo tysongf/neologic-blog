@@ -21,23 +21,16 @@ function getRandomCategory() {
 }
 
 async function getRandomLocalQuote() {
-   return await quotes.count().exec(async function (err, count) {
-      var random = Math.floor(Math.random() * count);
-      Model.findOne()
-         .skip(random)
-         .exec(function (err, result) {
-            return result;
-         });
-   });
+   return quotes.aggregate([{ $sample: { size: 1 } }]);
 }
 
 async function upsertQuote(quote) {
-   await planets.updateOne(
+   const newQuote = await quotes.updateOne(
       { quote: quote.quote },
-      { author: quote.author },
+      { quote: quote.quote, author: quote.author, category: quote.category },
       { upsert: true }
    );
-   return await quotes.findOne({ _id: "test" });
+   return quotes.findOne({ _id: newQuote.upsertedId }, { __v: 0 });
 }
 
 async function getExternalQuote() {
@@ -50,10 +43,12 @@ async function getExternalQuote() {
          headers: NINJA_HEADERS,
       })
       .then((response) => {
-         return response.data[0];
+         const quote = response.data[0];
+         const localQuote = upsertQuote(quote);
+         return localQuote;
       })
-      .catch((error) => {
-         throw new Error(error);
+      .catch((err) => {
+         throw new Error("Failed to fetch a quote");
       });
 }
 
