@@ -4,7 +4,7 @@ const entries_transformer = { __v: 0 };
 
 async function getAllEntries() {
    return await entries
-      .find({}, mongo_options)
+      .find({}, entries_transformer)
       .populate("quote", entries_transformer);
 }
 
@@ -15,14 +15,12 @@ async function getEntry(id) {
 }
 
 async function createEntry(entry) {
-   return await entries
-      .create({
-         _id: new mongoose.Types.ObjectId(),
-         title: entry.title,
-         description: entry.description,
-         quote: entry.quote,
-      })
-      .populate("quote", entries_transformer);
+   return await entries.create({
+      _id: new mongoose.Types.ObjectId(),
+      title: entry.title,
+      description: entry.description,
+      quote: entry.quote,
+   });
 }
 
 async function updateEntry(entry) {
