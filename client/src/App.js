@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import { Button, Card, Navbar, Container, Section } from "react-bootstrap";
+import "./App.css";
+import EntryList from "./components/Entries/EntryList";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+   return (
+      <>
+         <Navbar bg="primary" variant="dark">
+            <Container>
+               <Navbar.Brand href="#home">neologic</Navbar.Brand>
+            </Container>
+         </Navbar>
+         <EntryList />
+      </>
+   );
 }
 
 export default App;
