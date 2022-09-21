@@ -10,7 +10,7 @@ const EntryModal = (props) => {
    return (
       <>
          <Button variant="primary light" onClick={handleShow}>
-            Add New Entry +
+            New Journal Entry +
          </Button>
          <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
@@ -22,14 +22,14 @@ const EntryModal = (props) => {
                      className="mb-3"
                      controlId="exampleForm.ControlInput1"
                   >
-                     <Form.Label>Entry Title</Form.Label>
+                     <Form.Label>Title</Form.Label>
                      <Form.Control type="email" autoFocus />
                   </Form.Group>
                   <Form.Group
                      className="mb-3"
                      controlId="exampleForm.ControlTextarea1"
                   >
-                     <Form.Label>Entry Description</Form.Label>
+                     <Form.Label>Description</Form.Label>
                      <Form.Control as="textarea" rows={7} />
                   </Form.Group>
 
