@@ -1,15 +1,5 @@
-import {
-   Container,
-   Card,
-   Button,
-   CloseButton,
-   Row,
-   Col,
-} from "react-bootstrap";
-import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
-import DropMenu from "../UI/DropMenu";
+import { Container, Row } from "react-bootstrap";
 import EntryItem from "./EntryItem";
-import css from "./EntryList.css";
 
 function EntryList() {
    return (
