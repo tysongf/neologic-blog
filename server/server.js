@@ -1,6 +1,7 @@
 require("dotenv").config(); //load environment variables
 const http = require("http");
 const express = require("express");
+const cors = require("cors");
 const morgan = require("morgan");
 const helmet = require("helmet");
 const path = require("path");
@@ -9,6 +10,7 @@ const { mongoConnect } = require("./services/mongo");
 
 const app = express();
 app.use(helmet()); //security package
+app.use(cors());
 app.use(morgan("combined")); //request logger
 app.use(express.json()); //parse json requests
 app.use(api); //api routes
