@@ -11,6 +11,8 @@ const EntryModal = (props) => {
    const [quote, setQuote] = useState(null);
    const [isLoading, setIsLoading] = useState(false);
    const [isSubmitting, setIsSubmitting] = useState(false);
+   const [titleIsValid, setTitleIsValid] = useState(false);
+   const [descriptionIsValid, setDescriptionIsValid] = useState(false);
    const [error, setError] = useState("");
 
    const handleClose = () => setShow(false);
@@ -53,17 +55,32 @@ const EntryModal = (props) => {
             requestOptions,
             {}
          );
+
          entriesContext.addEntry(response.data);
+         setQuote(null);
+         setIsSubmitting(false);
+         setShow(false);
+         setEntryDescription("");
+         setEntryTitle("");
       } catch (err) {
          setIsSubmitting(false);
-         setError("Failed to post entry.");
       }
    };
 
    const titleChangeHandler = (event) => {
+      if (event.target.value.trim().length > 0) {
+         setTitleIsValid(true);
+      } else {
+         setTitleIsValid(false);
+      }
       setEntryTitle(event.target.value);
    };
    const descriptionChangeHandler = (event) => {
+      if (event.target.value.trim().length > 0) {
+         setDescriptionIsValid(true);
+      } else {
+         setDescriptionIsValid(false);
+      }
       setEntryDescription(event.target.value);
    };
 
@@ -72,7 +89,7 @@ const EntryModal = (props) => {
          <Button variant="primary light" onClick={handleShow}>
             New Journal Entry +
          </Button>
-         <Modal show={show} onHide={handleClose}>
+         <Modal show={show} onHide={handleClose} animation={false}>
             <Modal.Header closeButton>
                <Modal.Title>New Journal Entry</Modal.Title>
             </Modal.Header>
@@ -132,7 +149,12 @@ const EntryModal = (props) => {
                            className="float-end"
                            variant="primary"
                            onClick={handleSubmit}
-                           disabled={isLoading || isSubmitting}
+                           disabled={
+                              isLoading ||
+                              isSubmitting ||
+                              !descriptionIsValid ||
+                              !titleIsValid
+                           }
                         >
                            Submit Entry
                         </Button>
