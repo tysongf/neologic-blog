@@ -26,8 +26,13 @@ const DeleteModal = (props) => {
    };
 
    return (
-      <Modal show={props.show} onHide={props.onClose} animation={false}>
-         <Modal.Body>Are you sure you want to delete ?</Modal.Body>
+      <Modal
+         show={props.show}
+         onHide={props.onClose}
+         animation={false}
+         centered
+      >
+         <Modal.Body>Are you sure you want to delete this entry?</Modal.Body>
          <Modal.Footer>
             <div className="container">
                <div className="row">

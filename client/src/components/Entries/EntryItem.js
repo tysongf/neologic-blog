@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Col, Card, Button, CloseButton, Form, Stack } from "react-bootstrap";
+import Moment from "react-moment";
 import DeleteModal from "./DeleteModal";
 import "./EntryItem.css";
 
@@ -53,6 +54,8 @@ function EntryItem(props) {
             requestOptions,
             {}
          );
+         entry.title = title;
+         entry.description = description;
          setIsLoading(false);
          toggleEdit();
       } catch (err) {
@@ -81,7 +84,11 @@ function EntryItem(props) {
                            Cancel
                         </Button>
                      )}
-                     <div className="ms-auto">{entry.created_at}</div>
+                     <div className="ms-auto">
+                        <Moment format="dddd MMM D, YYYY - LT">
+                           {entry.created_at}
+                        </Moment>
+                     </div>
                      <CloseButton
                         className="ms-auto"
                         onClick={showDeleteHandler}
@@ -93,7 +100,9 @@ function EntryItem(props) {
                   <>
                      <Card.Body>
                         <Card.Title>{title}</Card.Title>
-                        <Card.Text>{description}</Card.Text>
+                        <Card.Text className="show-linebreaks">
+                           {description}
+                        </Card.Text>
                      </Card.Body>
                      <Card.Footer className="text-center">
                         {entry.quote && (
@@ -124,7 +133,10 @@ function EntryItem(props) {
                         <Form.Group className="mb-3">
                            <Form.Control
                               as="textarea"
-                              rows={Math.floor(entry.description.length / 40)}
+                              rows={Math.max(
+                                 Math.floor(entry.description.length / 20),
+                                 7
+                              )}
                               value={description}
                               onChange={descriptionChangeHandler}
                            />

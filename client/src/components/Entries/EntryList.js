@@ -39,7 +39,7 @@ function EntryList() {
       <Container>
          {isLoading && <Loading />}
          {!error && !isLoading && (
-            <Row xs={1} md={2} className="g-4 mt-0">
+            <Row xs={1} lg={2} className="g-4 mt-0">
                {entries.map((entry, idx) => (
                   <EntryItem
                      entry={entry}
