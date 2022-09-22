@@ -1,15 +1,17 @@
-import { useRef, useEffect, useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
-import Loading from "../UI/Loading";
+import { useState, useContext } from "react";
+import { Modal, Button, Form, Alert } from "react-bootstrap";
+import EntriesContext from "../../store/entries-context";
 
 const EntryModal = (props) => {
-   const firstRender = useRef(true);
+   const entriesContext = useContext(EntriesContext);
+
    const [show, setShow] = useState(false);
    const [entryTitle, setEntryTitle] = useState("");
    const [entryDescription, setEntryDescription] = useState("");
    const [quote, setQuote] = useState(null);
    const [isLoading, setIsLoading] = useState(false);
-   const [error, setError] = useState(null);
+   const [isSubmitting, setIsSubmitting] = useState(false);
+   const [error, setError] = useState("");
 
    const handleClose = () => setShow(false);
    const handleShow = () => {
@@ -19,34 +21,23 @@ const EntryModal = (props) => {
       }
    };
 
-   useEffect(() => {
-      if (firstRender.current) {
-         firstRender.current = false;
-         return;
-      }
-      console.log("Validating Form...");
-   }, [entryTitle, entryDescription]);
-
    const fetchNewQuote = async () => {
       setIsLoading(true);
-      setError(null);
       try {
          const response = await fetch("http://localhost:8000/api/quote");
-         if (!response.ok) {
-            const errorMessage = "Failed to fetch a quote.";
-            setError(errorMessage);
-            throw new Error(errorMessage);
-         }
          const data = await response.json();
          setIsLoading(false);
          setQuote(data);
-      } catch (err) {}
+      } catch (err) {
+         setIsLoading(false);
+         setError("Failed to fetch a quote.");
+      }
    };
 
    const handleSubmit = async () => {
       try {
-         console.log(entryTitle);
-         console.log(entryDescription);
+         setError("");
+         setIsSubmitting(true);
          const requestOptions = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -62,16 +53,14 @@ const EntryModal = (props) => {
             requestOptions,
             {}
          );
-         if (!response.ok) {
-            const errorMessage = "Failed to post entry.";
-            setError(errorMessage);
-            throw new Error(errorMessage);
-         }
-      } catch (err) {}
+         entriesContext.addEntry(response.data);
+      } catch (err) {
+         setIsSubmitting(false);
+         setError("Failed to post entry.");
+      }
    };
 
    const titleChangeHandler = (event) => {
-      console.log("event.target.value: " + event.target.value);
       setEntryTitle(event.target.value);
    };
    const descriptionChangeHandler = (event) => {
@@ -114,13 +103,18 @@ const EntryModal = (props) => {
                      />
                   </Form.Group>
 
-                  {!isLoading && (
+                  {!isLoading && !error && (
                      <blockquote className="text-center">
                         <em>
                            <span>"{quote?.quote}"</span>
                            <span className="author"> -{quote?.author}</span>
                         </em>
                      </blockquote>
+                  )}
+                  {error && (
+                     <Alert variant="warning" className="m-2 text-center">
+                        {error}
+                     </Alert>
                   )}
                </Form>
             </Modal.Body>
@@ -138,7 +132,7 @@ const EntryModal = (props) => {
                            className="float-end"
                            variant="primary"
                            onClick={handleSubmit}
-                           disabled={isLoading}
+                           disabled={isLoading || isSubmitting}
                         >
                            Submit Entry
                         </Button>

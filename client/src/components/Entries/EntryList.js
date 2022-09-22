@@ -1,17 +1,20 @@
-import { useState, useEffect } from "react";
-import { Container, Row } from "react-bootstrap";
+import { useState, useEffect, useContext } from "react";
+import { Alert, Container, Row } from "react-bootstrap";
+import EntriesContext from "../../store/entries-context";
 import Loading from "../UI/Loading";
 import EntryItem from "./EntryItem";
 import "./EntryList.css";
 
 function EntryList() {
-   const [entries, setEntries] = useState([]);
+   const entriesContext = useContext(EntriesContext);
+
+   const [entries, setEntries] = useState(entriesContext.entries);
    const [isLoading, setIsLoading] = useState(false);
    const [error, setError] = useState(null);
 
    useEffect(() => {
       fetchEntriesHandler();
-   }, []);
+   }, [entriesContext.entries]);
 
    const fetchEntriesHandler = async () => {
       setIsLoading(true);
@@ -26,7 +29,10 @@ function EntryList() {
          const data = await response.json();
          setIsLoading(false);
          setEntries(data);
-      } catch (err) {}
+      } catch (err) {
+         setIsLoading(false);
+         setError("Failed to fetch entries.");
+      }
    };
 
    return (
@@ -35,9 +41,18 @@ function EntryList() {
          {!error && !isLoading && (
             <Row xs={1} md={2} xl={3} className="g-4 mt-0">
                {entries.map((entry, idx) => (
-                  <EntryItem entry={entry} key={entry._id}></EntryItem>
+                  <EntryItem
+                     entry={entry}
+                     key={entry._id}
+                     onSave={fetchEntriesHandler}
+                  ></EntryItem>
                ))}
             </Row>
+         )}
+         {error && (
+            <Alert variant="danger" className="mt-4 text-center">
+               {error}
+            </Alert>
          )}
       </Container>
    );

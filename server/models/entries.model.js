@@ -5,6 +5,7 @@ const entries_transformer = { __v: 0 };
 async function getAllEntries() {
    return await entries
       .find({}, entries_transformer)
+      .sort({ created_at: -1 })
       .populate("quote", entries_transformer);
 }
 
