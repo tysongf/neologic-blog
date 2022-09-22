@@ -1,5 +1,5 @@
 
-<a href="http://www.neologic.ca:8000/">View Live</a>
+<a href="http://www.neologic.ca/">View Live</a>
 
 ![neologic architecture](https://github.com/tysongf/neologic-blog/blob/master/_plan/neologic-architecture.png?raw=true)
 
