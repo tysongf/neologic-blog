@@ -8,7 +8,7 @@ const quotesSchema = new mongoose.Schema(
       category: { type: String, required: false },
    },
    {
-      timestamps: { createdAt: "created_at" },
+      timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
    }
 );
 

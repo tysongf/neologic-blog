@@ -5,14 +5,7 @@ const mongo_options = { _id: 0, __v: 0 };
 const NINJA_API_URL = process.env.NINJA_API_URL;
 const NINJA_API_KEY = process.env.NINJA_API_KEY;
 
-const quote_categories = [
-   "experience",
-   "future",
-   "imagination",
-   "knowledge",
-   "learning",
-   "success",
-];
+const quote_categories = ["imagination", "knowledge", "learning", "success"];
 
 function getRandomCategory() {
    return quote_categories[Math.floor(Math.random() * quote_categories.length)];
