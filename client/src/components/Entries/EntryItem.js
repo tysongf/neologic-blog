@@ -12,11 +12,7 @@ import {
 import "./EntryItem.css";
 
 function EntryItem(props) {
-   const entry = {
-      title: "How Much Wood?",
-      description:
-         "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-   };
+   const entry = props.entry;
 
    const [editing, setEditing] = useState(false);
 
@@ -39,7 +35,7 @@ function EntryItem(props) {
                         Cancel
                      </Button>
                   )}
-                  <div className="ms-auto">Thursday, Sep. 21</div>
+                  <div className="ms-auto">{entry.created_at}</div>
                   <CloseButton className="ms-auto"></CloseButton>
                </Stack>
             </Card.Header>
@@ -50,15 +46,17 @@ function EntryItem(props) {
                      <Card.Text>{entry.description}</Card.Text>
                   </Card.Body>
                   <Card.Footer className="text-center">
-                     <blockquote>
-                        <em>
-                           <span>
-                              "Anything that can go wrong, needs at least one
-                              fallback."
-                           </span>
-                           <span className="author"> -Tyson Fritz</span>
-                        </em>
-                     </blockquote>
+                     {entry.quote && (
+                        <blockquote>
+                           <em>
+                              <span>"{entry.quote.quote}"</span>
+                              <span className="author">
+                                 {" "}
+                                 -{entry.quote.author}
+                              </span>
+                           </em>
+                        </blockquote>
+                     )}
                   </Card.Footer>
                </>
             )}
@@ -69,7 +67,6 @@ function EntryItem(props) {
                         className="mb-3"
                         controlId="exampleForm.ControlInput1"
                      >
-                        <Form.Label>Entry Title</Form.Label>
                         <Form.Control
                            type="text"
                            autoFocus
@@ -80,10 +77,9 @@ function EntryItem(props) {
                         className="mb-3"
                         controlId="exampleForm.ControlTextarea1"
                      >
-                        <Form.Label>Entry Description</Form.Label>
                         <Form.Control
                            as="textarea"
-                           rows={7}
+                           rows={Math.floor(entry.description.length / 40)}
                            value={entry.description}
                         />
                      </Form.Group>
