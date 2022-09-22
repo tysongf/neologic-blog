@@ -19,7 +19,7 @@ function App() {
                   className="justify-content-end"
                   onClick={toggleTheme}
                >
-                  {isDark ? "Light" : "Dark"} Mode
+                  {!isDark ? "Light" : "Dark"} Theme
                </Button>
             </Container>
          </Navbar>

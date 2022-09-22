@@ -34,6 +34,15 @@ const DeleteModal = (props) => {
          animation={false}
          centered
       >
+         <Modal.Header
+            style={{
+               backgroundColor: theme.secondaryBackgroundColor,
+               color: theme.color,
+               borderColor: theme.borderColor,
+            }}
+         >
+            <Modal.Title>Confirm Delete</Modal.Title>
+         </Modal.Header>
          <Modal.Body
             style={{
                backgroundColor: theme.backgroundColor,
