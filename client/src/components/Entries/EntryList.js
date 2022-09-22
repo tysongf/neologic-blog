@@ -18,6 +18,7 @@ function EntryList() {
    }, [entriesContext.entries]);
 
    const fetchEntriesHandler = async () => {
+      console.log("Fetch Entries");
       setIsLoading(true);
       setError(null);
       try {
@@ -36,7 +37,7 @@ function EntryList() {
       }
    };
 
-   const [{ theme, isDark }, toggleTheme] = useContext(ThemeContext);
+   const [{ theme }] = useContext(ThemeContext);
 
    return (
       <Container style={{ backgroundColor: theme.backgroundColor }}>
