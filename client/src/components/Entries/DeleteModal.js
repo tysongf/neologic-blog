@@ -14,7 +14,7 @@ const DeleteModal = (props) => {
          };
 
          const response = await fetch(
-            `http://localhost/api/entries/${entry._id}`,
+            `/api/entries/${entry._id}`,
             requestOptions,
             {}
          );

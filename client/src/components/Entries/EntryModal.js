@@ -27,7 +27,7 @@ const EntryModal = (props) => {
    const fetchNewQuote = async () => {
       setIsLoading(true);
       try {
-         const response = await fetch("http://localhost/api/quote");
+         const response = await fetch("/api/quote");
          const data = await response.json();
          setIsLoading(false);
          setQuote(data);
@@ -51,11 +51,7 @@ const EntryModal = (props) => {
             }),
          };
 
-         const response = await fetch(
-            "http://localhost/api/entries",
-            requestOptions,
-            {}
-         );
+         const response = await fetch("/api/entries", requestOptions, {});
 
          entriesContext.addEntry(response.data);
          setQuote(null);

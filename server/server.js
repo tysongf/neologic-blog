@@ -9,18 +9,19 @@ const api = require("./routes/api");
 const { mongoConnect } = require("./services/mongo");
 
 const app = express();
-app.use(helmet()); //security package
+//app.use(helmet()); //security package
 app.use(cors());
 app.use(morgan("combined")); //request logger
 app.use(express.json()); //parse json requests
 app.use(api); //api routes
 
 //Serve client (front-end) at root path
-app.use(express.static(path.join(__dirname, "..", "public")));
+app.use(express.static(path.join(__dirname, "public")));
+app.use("/static", express.static(path.join(__dirname, "public", "static")));
 
 //Enable client-side routing
 app.get("/*", (req, res) => {
-   res.sendFile(path.join(__dirname, "..", "public", "index.html"));
+   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 //Initialize server
