@@ -7,7 +7,7 @@ import { ThemeContext } from "./contexts/theme-context";
 import EntriesProvider from "./contexts/EntriesProvider";
 
 function App() {
-   const [{ theme, isDark }, toggleTheme] = useContext(ThemeContext);
+   const [{ isDark }, toggleTheme] = useContext(ThemeContext);
    return (
       <EntriesProvider>
          <Navbar bg="primary" variant="dark">
