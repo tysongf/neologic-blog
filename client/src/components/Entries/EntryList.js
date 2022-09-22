@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { Alert, Container, Row } from "react-bootstrap";
+import { ThemeContext } from "../../contexts/theme-context";
 import EntriesContext from "../../contexts/entries-context";
 import Loading from "../UI/Loading";
 import EntryItem from "./EntryItem";
@@ -35,8 +36,10 @@ function EntryList() {
       }
    };
 
+   const [{ theme, isDark }, toggleTheme] = useContext(ThemeContext);
+
    return (
-      <Container>
+      <Container style={{ backgroundColor: theme.backgroundColor }}>
          {isLoading && <Loading />}
          {!error && !isLoading && (
             <Row xs={1} lg={2} className="g-4 mt-0">

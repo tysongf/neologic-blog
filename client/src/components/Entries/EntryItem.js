@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Col, Card, Button, CloseButton, Form, Stack } from "react-bootstrap";
 import Moment from "react-moment";
+import { ThemeContext } from "../../contexts/theme-context";
 import DeleteModal from "./DeleteModal";
 import "./EntryItem.css";
 
@@ -67,11 +68,18 @@ function EntryItem(props) {
       }
    };
 
+   const [{ theme }] = useContext(ThemeContext);
+
    return (
       <>
          <Col>
-            <Card variant="primary">
-               <Card.Header>
+            <Card variant="primary" style={{ borderColor: theme.borderColor }}>
+               <Card.Header
+                  style={{
+                     backgroundColor: theme.secondaryBackgroundColor,
+                     color: theme.color,
+                  }}
+               >
                   <Stack direction="horizontal">
                      {!editing && (
                         <Button variant="primary" onClick={toggleEdit}>
@@ -101,13 +109,24 @@ function EntryItem(props) {
                </Card.Header>
                {!editing && (
                   <>
-                     <Card.Body>
+                     <Card.Body
+                        style={{
+                           backgroundColor: theme.backgroundColor,
+                           color: theme.color,
+                        }}
+                     >
                         <Card.Title>{title}</Card.Title>
                         <Card.Text className="show-linebreaks">
                            {description}
                         </Card.Text>
                      </Card.Body>
-                     <Card.Footer className="text-center">
+                     <Card.Footer
+                        className="text-center"
+                        style={{
+                           backgroundColor: theme.secondaryBackgroundColor,
+                           color: theme.color,
+                        }}
+                     >
                         {entry.quote && (
                            <blockquote>
                               <em>
@@ -123,10 +142,21 @@ function EntryItem(props) {
                   </>
                )}
                {editing && (
-                  <Card.Body>
+                  <Card.Body
+                     style={{
+                        backgroundColor: theme.backgroundColor,
+                        color: theme.color,
+                     }}
+                  >
                      <Form>
                         <Form.Group className="mb-3">
                            <Form.Control
+                              style={{
+                                 backgroundColor:
+                                    theme.secondaryBackgroundColor,
+                                 color: theme.color,
+                                 borderColor: theme.borderColor,
+                              }}
                               type="text"
                               autoFocus
                               value={title}
@@ -135,6 +165,12 @@ function EntryItem(props) {
                         </Form.Group>
                         <Form.Group className="mb-3">
                            <Form.Control
+                              style={{
+                                 backgroundColor:
+                                    theme.secondaryBackgroundColor,
+                                 color: theme.color,
+                                 borderColor: theme.borderColor,
+                              }}
                               as="textarea"
                               rows={Math.max(
                                  Math.floor(entry.description.length / 20),

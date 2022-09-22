@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { Modal, Button, Form, Alert } from "react-bootstrap";
 import EntriesContext from "../../contexts/entries-context";
+import { ThemeContext } from "../../contexts/theme-context";
 
 const EntryModal = (props) => {
    const entriesContext = useContext(EntriesContext);
@@ -84,16 +85,30 @@ const EntryModal = (props) => {
       setEntryDescription(event.target.value);
    };
 
+   const [{ theme }] = useContext(ThemeContext);
+
    return (
       <>
          <Button variant="primary light" onClick={handleShow}>
             New Journal Entry +
          </Button>
          <Modal show={show} onHide={handleClose} animation={false}>
-            <Modal.Header closeButton>
+            <Modal.Header
+               closeButton
+               style={{
+                  backgroundColor: theme.secondaryBackgroundColor,
+                  color: theme.color,
+                  borderColor: theme.borderColor,
+               }}
+            >
                <Modal.Title>New Journal Entry</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body
+               style={{
+                  backgroundColor: theme.backgroundColor,
+                  color: theme.color,
+               }}
+            >
                <Form>
                   <Form.Group
                      className="mb-3"
@@ -101,6 +116,11 @@ const EntryModal = (props) => {
                   >
                      <Form.Label>Title</Form.Label>
                      <Form.Control
+                        style={{
+                           backgroundColor: theme.secondaryBackgroundColor,
+                           color: theme.color,
+                           borderColor: theme.borderColor,
+                        }}
                         type="text"
                         autoFocus
                         value={entryTitle}
@@ -113,6 +133,11 @@ const EntryModal = (props) => {
                   >
                      <Form.Label>Description</Form.Label>
                      <Form.Control
+                        style={{
+                           backgroundColor: theme.secondaryBackgroundColor,
+                           color: theme.color,
+                           borderColor: theme.borderColor,
+                        }}
                         as="textarea"
                         rows={5}
                         value={entryDescription}
@@ -135,7 +160,13 @@ const EntryModal = (props) => {
                   )}
                </Form>
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer
+               style={{
+                  backgroundColor: theme.secondaryBackgroundColor,
+                  color: theme.color,
+                  borderColor: theme.borderColor,
+               }}
+            >
                <div className="container">
                   <div className="row">
                      <div className="col">
