@@ -7,11 +7,15 @@ const defaultEntriesState = {
 
 const entriesReducer = (state, action) => {
    if (action.type === "ADD_ENTRY") {
-      const updatedEntries = state.entries.concat(action.entries);
+      const updatedEntries = state.entries.concat(action.entry);
       return {
          entries: updatedEntries,
       };
    } else if (action.type === "REMOVE_ENTRY") {
+      const updatedEntries = state.entries.splice(action.entry);
+      return {
+         entries: updatedEntries,
+      };
    }
 };
 

@@ -56,7 +56,7 @@ const EntryModal = (props) => {
             {}
          );
 
-         entriesContext.addEntry(response.data);
+         entriesContext.incrementReloads();
          setQuote(null);
          setIsSubmitting(false);
          setShow(false);
