@@ -35,7 +35,7 @@ async function httpGetEntry(req, res) {
 
 async function httpPatchEntry(req, res) {
    try {
-      return res.status(201).json(await updateEntry(req.body));
+      return res.status(201).json(await updateEntry(req.params.id, req.body));
    } catch (err) {
       return res.status(400).json({ errors: [err.message] });
    }

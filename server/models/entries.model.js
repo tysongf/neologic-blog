@@ -23,8 +23,8 @@ async function createEntry(entry) {
    });
 }
 
-async function updateEntry(entry) {
-   return await entries.updateOne({ _id: entry._id }, entry);
+async function updateEntry(id, entry) {
+   return await entries.updateOne({ _id: id }, entry);
 }
 
 async function deleteEntryById(id) {
