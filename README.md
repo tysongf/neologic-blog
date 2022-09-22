@@ -1,3 +1,5 @@
+![neologic architecture](https://github.com/tysongf/neologic-blog/blob/master/_plan/neologic-architecture.png?raw=true)
+
 ### ToDo:
 
 -  Authentication / Users
