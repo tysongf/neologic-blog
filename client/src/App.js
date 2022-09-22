@@ -4,7 +4,7 @@ import "./App.css";
 import EntryList from "./components/Entries/EntryList";
 import EntryModal from "./components/Entries/EntryModal";
 import { ThemeContext } from "./contexts/theme-context";
-import EntriesProvider from "./store/EntriesProvider";
+import EntriesProvider from "./contexts/EntriesProvider";
 
 function App() {
    const [{ theme, isDark }, toggleTheme] = useContext(ThemeContext);
