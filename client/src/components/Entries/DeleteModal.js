@@ -1,12 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Modal, Button } from "react-bootstrap";
-import EntriesContext from "../../store/entries-context";
+import EntriesContext from "../../contexts/entries-context";
 
 const DeleteModal = (props) => {
    const entry = props.entry;
    const entriesContext = useContext(EntriesContext);
-
-   const [show, setShow] = useState(props.show);
 
    const handleDelete = async () => {
       try {
@@ -19,9 +17,10 @@ const DeleteModal = (props) => {
             requestOptions,
             {}
          );
-
-         entriesContext.removeEntry(entry._id);
-         props.onClose();
+         if (response.ok) {
+            entriesContext.removeEntry(entry._id);
+            props.onClose();
+         }
       } catch (err) {}
    };
 

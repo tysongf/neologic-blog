@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { Modal, Button, Form, Alert } from "react-bootstrap";
-import EntriesContext from "../../store/entries-context";
+import EntriesContext from "../../contexts/entries-context";
 
 const EntryModal = (props) => {
    const entriesContext = useContext(EntriesContext);

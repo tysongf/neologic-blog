@@ -54,10 +54,13 @@ function EntryItem(props) {
             requestOptions,
             {}
          );
-         entry.title = title;
-         entry.description = description;
-         setIsLoading(false);
-         toggleEdit();
+
+         if (response.ok) {
+            entry.title = title;
+            entry.description = description;
+            setIsLoading(false);
+            toggleEdit();
+         }
       } catch (err) {
          setIsLoading(false);
          cancelHandler();

@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { Alert, Container, Row } from "react-bootstrap";
-import EntriesContext from "../../store/entries-context";
+import EntriesContext from "../../contexts/entries-context";
 import Loading from "../UI/Loading";
 import EntryItem from "./EntryItem";
 import "./EntryList.css";
