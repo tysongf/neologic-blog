@@ -4,6 +4,8 @@
    "description": "Neologic Blog",
    "main": "index.js",
    "scripts": {
+      "install-server": "npm install --prefix server",
+      "install-client": "npm install --prefix client",
       "test": "echo \"Error: no test specified\" && exit 1"
    },
    "repository": {
