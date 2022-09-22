@@ -51,7 +51,7 @@ function EntryItem(props) {
          };
 
          const response = await fetch(
-            `http://localhost:8000/api/entries/${entry._id}`,
+            `http://localhost/api/entries/${entry._id}`,
             requestOptions,
             {}
          );

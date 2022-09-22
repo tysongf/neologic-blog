@@ -22,7 +22,7 @@ function EntryList() {
       setIsLoading(true);
       setError(null);
       try {
-         const response = await fetch("http://localhost:8000/api/entries");
+         const response = await fetch("http://localhost/api/entries");
          if (!response.ok) {
             const errorMessage = "Failed to fetch entries.";
             setError(errorMessage);
