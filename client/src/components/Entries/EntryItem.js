@@ -172,10 +172,7 @@ function EntryItem(props) {
                                  borderColor: theme.borderColor,
                               }}
                               as="textarea"
-                              rows={Math.max(
-                                 Math.floor(entry.description.length / 20),
-                                 7
-                              )}
+                              rows={9}
                               value={description}
                               onChange={descriptionChangeHandler}
                            />
